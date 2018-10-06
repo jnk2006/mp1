@@ -6,7 +6,7 @@
  * Time: 9:18 PM
  */
 
-main::startcsv("student.csv");
+main::startcsv("names.csv");
 
 class main
 {
