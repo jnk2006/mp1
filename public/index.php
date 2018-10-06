@@ -13,7 +13,6 @@ class main
     public static function startcsv($filename)
     {
         $records = csv::getRecords($filename);
-        print_r($records);
     }
 }
 
@@ -25,7 +24,7 @@ class csv
         while(!feof($file))
         {
             $record = fgetcsv($file);
-            $records[] = recordFactory::create();
+            $records[] = recordFactory::create($record);
         }
         fclose($file);
         return $records;
@@ -34,14 +33,17 @@ class csv
 
 class record
 {
-
+    public function __construct($record)
+    {
+        print_r($record);
+    }
 }
 
 class recordFactory
 {
     public static function create(Array $array = null)
     {
-        $record = new record();
+        $record = new record($array);
         return $record;
     }
 }
