@@ -13,6 +13,11 @@ class main
     public static function startcsv($filename)
     {
         $records = csv::getRecords($filename);
+        print_r($records);
+        foreach($records as $record)
+        {
+            print_r($record);
+        }
     }
 }
 
@@ -50,6 +55,10 @@ class record
         {
             $this->createProperty($property, $value);
         }
+    }
+
+    public function createRow()
+    {
         print_r($this);
     }
 
