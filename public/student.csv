@@ -1,6 +1,7 @@
-id,name,ucid,term
-1,naveena,jnk22,fall
-2,naveen,tnb49,spring
-3,praha,pp59,fall
-4,vaku,vsv39,fall
-5,prakash,dsp33,spring
+id,name,ucid,term,grade
+1,naveena,jnk22,fall,A
+2,naveen,tnb49,spring,B
+3,praha,pp59,fall,B
+4,vaku,vsv39,fall,A
+5,prakash,dsp33,spring,C
+6,nikhil,ssn29,spring,A

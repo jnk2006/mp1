@@ -37,7 +37,6 @@ class html
     public static function generateTable($records)
     {
         $htmlOutput = '';
-        //$htmlOutput .= '<table class = "table table-striped">';
         $count = 0;
         foreach($records as $record)
         {
@@ -47,23 +46,26 @@ class html
 
                 $fields = array_keys($array);
                 $tablehead = self::returnHeadings($fields);
-                $htmlOutput .= '<thead><tr>'.$tablehead.'</tr></thead>';
+                $htmlOutput .= '<thead><tr>'.$tablehead.'</tr></thead><tbody>';
 
                 $values = array_values($array);
                 $tablerow = self::returnValues($values);
-                $htmlOutput .= '<tbody>'.$tablerow.'</tbody>';
+                //$htmlOutput .= '<tbody>'.$tablerow.'</tbody>';
+                $htmlOutput .= $tablerow;
             }
             else
             {
                 $array = $record->returnArray();
                 $values = array_values($array);
                 $tablerow = self::returnValues($values);
-                $htmlOutput .= '<tbody>'.$tablerow.'</tbody>';
+                //$htmlOutput .= '<tbody>'.$tablerow.'</tbody>';
+                $htmlOutput .= $tablerow;
             }
             $count++;
-        }
-        //$htmlOutput .= '</table>';
 
+            //$htmlOutput .= '</tbody>';
+        }
+        $htmlOutput .= '</tbody>';
         return $htmlOutput;
     }
 
