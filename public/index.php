@@ -14,7 +14,21 @@ class main
     {
         $records = csv::getRecords($filename);
         $table = html::generateTable($records);
+        system::htmlPage($table);
+    }
+}
 
+class system
+{
+    public static function htmlPage($page)
+    {
+        $fpage = '<html><head><title>CSV Table</title><link rel="stylesheet" type="text/css"
+ href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/></head>';
+        $fpage .= '<body>';
+        $fpage .= '<table class = "table table-striped">';
+        $fpage .= $page;
+        $fpage .= '</table></body></html>';
+        print $fpage;
     }
 }
 
@@ -22,22 +36,75 @@ class html
 {
     public static function generateTable($records)
     {
+        $htmlOutput = '';
+        //$htmlOutput .= '<table class = "table table-striped">';
         $count = 0;
         foreach($records as $record)
         {
             if($count == 0)
             {
                 $array = $record->returnArray();
+
                 $fields = array_keys($array);
+                $tablehead = self::returnHeadings($fields);
+                $htmlOutput .= '<thead><tr>'.$tablehead.'</tr></thead>';
+
                 $values = array_values($array);
-                print_r($fields);
-                print_r($values);
+                $tablerow = self::returnValues($values);
+                $htmlOutput .= '<tbody>'.$tablerow.'</tbody>';
             }
             else
             {
-
+                $array = $record->returnArray();
+                $values = array_values($array);
+                $tablerow = self::returnValues($values);
+                $htmlOutput .= '<tbody>'.$tablerow.'</tbody>';
             }
+            $count++;
         }
+        //$htmlOutput .= '</table>';
+
+        return $htmlOutput;
+    }
+
+    static public function returnHeadings($fields)
+    {
+        $num = count($fields);
+        $tablehead = '';
+        for($c = 0; $c < $num; $c++)
+        {
+            if(!empty($fields[$c]))
+            {
+                $head = $fields[$c];
+            }
+            else
+            {
+                $head = "&nbsp;";
+            }
+            $tablehead .= '<th>'.$head.'</th>';
+        }
+        return $tablehead;
+    }
+
+    static public function returnValues($values)
+    {
+        $tablerow = '<tr>';
+        $num = count($values);
+        for($c = 0; $c < $num; $c++)
+        {
+            if(!empty($values[$c]))
+            {
+                $data = $values[$c];
+            }
+            else
+            {
+                $data = "&nbsp;";
+            }
+            $tablerow .= '<td>'.$data.'</td>';
+
+        }
+        $tablerow .= '</tr>';
+        return $tablerow;
     }
 }
 
