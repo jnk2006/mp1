@@ -45,8 +45,8 @@ class record
 {
     public function __construct(Array $fieldNames = null, Array $values = null)
     {
-        print_r($fieldNames);
-        print_r($values);
+        $record = array_combine($fieldNames, $values);
+        print_r($record);
         $this->createProperty();
     }
 
